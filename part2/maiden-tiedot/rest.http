@@ -1,4 +1,1 @@
-
-GET https://api.openweathermap.org/data/2.5/weather?q=Helsinki&appid=a1cfaf8c4af5fa3ce9ac026a83688999
-
 Get https://restcountries.com/v3.1/name/finland

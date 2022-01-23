@@ -21,5 +21,17 @@ Exercises:
 - anekdootit 1.12 - 1.14  
     [app.js](./part1/anekdootit/src/App.js)  
 
-
 ## Part 2
+Exercises:  
+- kurssitiedot 2.1 - 2.5
+  
+     [app.js](./part2/kurssitiedot/src/App.js)  
+
+- maiden-tiedot 2.12 - 2.14  
+
+    [source](./part2/maiden-tiedot/src/)  
+
+- puhelinluettelo 2.6. - 2.11, 2.15 - 2.20   
+      [source](./part2/puhelinluettpuhelinluettelo/src/)  
+
+## Part 3

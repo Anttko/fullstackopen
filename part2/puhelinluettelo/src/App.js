@@ -1,27 +1,27 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
-
 
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import DisplayPersons from './components/DisplayPersons'
+import ErrorMessage from './components/ErrorMessage'
+import personService from './services/persons'
 
 const App = () => {
   const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
 
-
   const [newFilter, setNewFilter] = useState('')
-  const [filteredPersons, setFilterPersons] = useState('')
-
+  const [errorMessage, setErrorMessage] = useState(null)
 
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/persons')
-      .then(response => {
-        console.log('promise fulfilled')
-        setPersons(response.data)
+    personService
+      .getAll()
+      .then(initialPersons => {
+        setPersons(initialPersons)
+      })
+      .catch(error => {
+        console.log('fail')
       })
   }, [])
 
@@ -35,44 +35,84 @@ const App = () => {
   }
 
   const addPerson = (event) => {
+    event.preventDefault()
     console.log('person', persons)
     console.log(newName)
     console.log('inc', persons.includes(newName))
-    event.preventDefault()
+    let finder = persons.filter(p => p.name === newName)
 
-    const personObject = {
-      name: newName,
-      number: newNumber
-    }
-    if (persons.find(({ name }) => name === personObject.name)) {
-      window.alert(`${newName} is already added to phonebook`)
+
+
+    if (finder.length >= 1) {
+      if (window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)) {
+        personService
+          .update(finder[0].id, { ...finder[0], number: newNumber })
+          .then(response => {
+            setPersons(persons.map(p => p.id !== finder[0].id ? p : response))
+          })
+        setNewName('')
+        setNewNumber('')
+      }
     } else {
-      setPersons(persons.concat(personObject))
+      const personObject = {
+        id: persons.length + 1 + Math.round(Math.random() * 99999),
+        name: newName,
+        number: newNumber
+      }
+      personService
+        .create(personObject)
+        .then(returnedNote => {
+          setPersons(persons.concat(returnedNote))
+
+          setNewName('')
+          setNewNumber('')
+        }).catch(error => {
+          console.log('update error', error)
+          setErrorMessage(
+            `User was '${finder[0].name}' was already removed from server`
+          )
+          setTimeout(() => {
+            setErrorMessage(null)
+          }, 5000)
+
+          setPersons(persons.filter(p => p.id !== finder[0].id))
+        })
     }
-    setNewName('')
-    setNewNumber('')
+
     console.log('person', persons)
   }
 
   const filterPerson = (event) => {
     setNewFilter(event.target.value)
 
-    const personResults = persons.filter((person) => {
-      return (
-        person.name
-          .toString()
-          .toLowerCase()
-          .indexOf(newFilter.toLowerCase()) > -1
-      )
-    })
-    setFilterPersons(personResults)
   }
 
+  const deleteButton = id => {
+    console.log('id:', id)
+    let finder = persons.find(p => p.id === id).name
+    if (window.confirm(`Delete ${finder}`)) {
+      personService
+        .rm(id).then(() => {
+          setPersons(persons.filter(p => p.id !== id))
+        }
+        ).catch(error => {
+          console.log('delete error', error)
+          setErrorMessage(
+            `User was '${finder}' was already removed from server`
+          )
+          setTimeout(() => {
+            setErrorMessage(null)
+          }, 5000)
+
+          setPersons(persons.filter(p => p.id !== id))
+        })
+    }
+  }
 
   return (
     <div>
       <h2>Phonebook</h2>
-
+      <ErrorMessage message={errorMessage} />
       <Filter value={newFilter} filterPerson={filterPerson} />
 
       <h2>Add new</h2>
@@ -81,7 +121,7 @@ const App = () => {
 
       <h2>Numbers</h2>
 
-      <DisplayPersons persons={persons} filteredPerson={filteredPersons} filter={newFilter} />
+      <DisplayPersons persons={persons} filter={newFilter} deleteButton={deleteButton} />
 
     </div>
   )
