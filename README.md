@@ -32,6 +32,6 @@ Exercises:
     [source](./part2/maiden-tiedot/src/)  
 
 - puhelinluettelo 2.6. - 2.11, 2.15 - 2.20   
-      [source](./part2/puhelinluettpuhelinluettelo/src/)  
+      [source](./part2/puhelinluettelo/src/)  
 
 ## Part 3
