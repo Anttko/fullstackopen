@@ -13,6 +13,7 @@ const App = () => {
 
   const [newFilter, setNewFilter] = useState('')
   const [errorMessage, setErrorMessage] = useState(null)
+  const [errorState, setErrorState] = useState(true)
 
   useEffect(() => {
     personService
@@ -52,22 +53,38 @@ const App = () => {
           })
         setNewName('')
         setNewNumber('')
+        setErrorState(false)
+        setErrorMessage(
+          `User: '${finder[0].name}' updated succesfully`
+        )
+        setTimeout(() => {
+          setErrorMessage(null)
+          setErrorState(true)
+        }, 5000)
+
       }
     } else {
       const personObject = {
-        id: persons.length + 1 + Math.round(Math.random() * 99999),
+        /*id: persons.length + 1 + Math.round(Math.random() * 99999),*/
         name: newName,
         number: newNumber
       }
       personService
         .create(personObject)
-        .then(returnedNote => {
-          setPersons(persons.concat(returnedNote))
+        .then(returnedPerson => {
+          setPersons(persons.concat(returnedPerson))
 
           setNewName('')
           setNewNumber('')
         }).catch(error => {
-          console.log('update error', error)
+
+          if (error.response.data) {
+            setErrorMessage(error.response.data.error)
+            setTimeout(() => {
+              setErrorMessage(null)
+            }, 5000)
+          }
+          console.log(error.response.data)
           setErrorMessage(
             `User was '${finder[0].name}' was already removed from server`
           )
@@ -112,7 +129,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <ErrorMessage message={errorMessage} />
+      <ErrorMessage message={errorMessage} errorState={errorState} />
       <Filter value={newFilter} filterPerson={filterPerson} />
 
       <h2>Add new</h2>
