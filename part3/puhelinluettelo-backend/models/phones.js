@@ -11,7 +11,6 @@ mongoose.connect(url)
     })
 
 const personSchema = new mongoose.Schema({
-
     name: {
         type: String,
         minlength: 3,
@@ -20,6 +19,7 @@ const personSchema = new mongoose.Schema({
     },
     number: {
         type: String,
+        minlength: 8,
         validate: {
             validator: function (v) {
                 return /^[0-9]{2,3}-[0-9]{6,12}/.test(v);
@@ -28,9 +28,8 @@ const personSchema = new mongoose.Schema({
         },
         required: [true, 'User phone number required']
     },
-    minlength: 8
-
 })
+
 personSchema.set('toJSON', {
     transform: (document, returnedObject) => {
         returnedObject.id = returnedObject._id.toString()
