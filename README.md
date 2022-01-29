@@ -35,3 +35,11 @@ Exercises:
       [source](./part2/puhelinluettelo/src/)  
 
 ## Part 3
+
+- puhelinluettelo back-end 3.1 - 3.22   
+Front-end updated to part 2 
+
+[source](./part3/puhelinluettelo/src/)    
+
+[Part3.md](./part3/part3.md)    
+ 
