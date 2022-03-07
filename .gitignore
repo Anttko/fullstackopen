@@ -1,5 +1,12 @@
 
+
+
+.rest 
+.http 
 .env
+rest/
+
+
 # Logs
 logs
 *.log
