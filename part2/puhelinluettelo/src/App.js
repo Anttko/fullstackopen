@@ -42,8 +42,6 @@ const App = () => {
     console.log('inc', persons.includes(newName))
     let finder = persons.filter(p => p.name === newName)
 
-
-
     if (finder.length >= 1) {
       if (window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)) {
         personService
