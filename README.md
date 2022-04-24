@@ -2,45 +2,29 @@
 
 Working on this course from the start of 2022. Interested in learning web-development.  
 
-## Part 0 
-Exercises: 
-- 0.4, 0.5, 0.6  
-    [04.md](./part0/04.md)   
-    [05.md](./part0/05.md)   
-    [06.md](./part0/06.md)   
 
-## Part 1  
+## Progress :soon:
 
-Exercises:
-- kurssitiedot 1.1 - 1.5   
-    [app.js](./part1/kurssitiedot/src/App.js)  
+| Part         | Done | src/ |
+|--------------|:-----:|-----------:|
+| part0 |  :white_check_mark: |  [src](./part0/)  |
+| part1 |  :white_check_mark: |  [src](./part1/)  |
+| part2 |  :white_check_mark: |  [src](./part2/)  |
+| part3 |  :white_check_mark: |  [src](./part3/)  |
+| part4 |  :white_check_mark: |  [src](./part4/)  |
+| part5 |  :white_check_mark: |  [src](./part5/)  |
+| part6 |  :white_check_mark: |  [src](./part6/)  |
+| part7 |  |  [src](./part7/)  |
+| part8 |   |  [src](./part8/)  |
+| part9 |   |  [src](./part9/)  |
+| part10 |   |  [src](./part10/)  |
+| part11 |   |  [src](./part11/)  |
+| part12 |   |  [src](./part12/)  |
+| part13 |  |  [src](./part13/)  |
 
-- unicafe 1.6 - 1.11  
-    [app.js](./part1/unicafe/src/App.js)  
 
-- anekdootit 1.12 - 1.14  
-    [app.js](./part1/anekdootit/src/App.js)  
 
-## Part 2
-Exercises:  
-- kurssitiedot 2.1 - 2.5
-  
-     [app.js](./part2/kurssitiedot/src/App.js)  
 
-- maiden-tiedot 2.12 - 2.14  
 
-    [source](./part2/maiden-tiedot/src/)  
 
-- puhelinluettelo 2.6. - 2.11, 2.15 - 2.20   
-      [source](./part2/puhelinluettelo/src/)  
 
-## Part 3
-
-- puhelinluettelo back-end 3.1 - 3.22    
-    
-Front-end updated to part 2   
-
-[source](./part3/puhelinluettelo-backend/)    
-
-[Part3.md](./part3/part3.md)    
- 
