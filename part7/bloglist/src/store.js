@@ -1,15 +1,15 @@
 import { createStore, combineReducers, compose, applyMiddleware } from "redux";
-import anecdoteReducer from "./reducers/anecdoteReducer";
-import filterReducer from "./reducers/filterReducer";
+import blogReducer from "./reducers/blogReducer";
 import notificationReducer from "./reducers/notificationReducer";
 import ReduxThunk from "redux-thunk";
+import loginReducer from "./reducers/loginReducer";
 
 const middlewares = [ReduxThunk];
 
 const reducer = combineReducers({
-  anecdoteReducer: anecdoteReducer,
-  filterReducer: filterReducer,
-  notificationReducer: notificationReducer,
+  blogs: blogReducer,
+  notification: notificationReducer,
+  login: loginReducer,
 });
 
 export const store = createStore(
