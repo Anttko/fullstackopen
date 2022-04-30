@@ -9,7 +9,11 @@ const blogSlice = createSlice({
       state.push(action.payload);
     },
     setBlogs(state, action) {
-      return action.payload;
+      const sortedBlogs = action.payload;
+      sortedBlogs.sort(function (a, b) {
+        return b.likes - a.likes;
+      });
+      return sortedBlogs;
     },
     updateLikes(state, action) {
       console.log(action.payload);
@@ -19,14 +23,17 @@ const blogSlice = createSlice({
     },
     removeBlog(state, action) {
       const id = action.payload;
-      return setBlogs(state.filter((p) => p.id !== id));
+      return state.filter((p) => p.id !== id);
+    },
+    loadComment(state, action) {
+      return action.payload;
     },
   },
 });
 
 export const likeBlog = (blog) => {
   return async (dispatch) => {
-    console.log('id',blog.id);
+    console.log("id", blog.id);
     const likesAdd = {
       user: blog.user.id,
       title: blog.title,
@@ -56,12 +63,20 @@ export const createBlog = (content) => {
 };
 export const deleteBlog = (id) => {
   return async (dispatch) => {
-    const deleteBlog = await blogService
-      .remove(id)
-      .then(dispatch(removeBlog(id)));
+    await blogService.remove(id).then(dispatch(removeBlog(id)));
   };
 };
 
-export const { appendBlogs, setBlogs, updateLikes, removeBlog } =
+export const commentBlog = (id, comment) => {
+  return async (dispatch) => {
+    console.log("comment: ", comment.value);
+    const newObject = { comments: comment.value };
+    const request = await blogService.addComment(id, newObject);
+    console.log(request, "request comment");
+    dispatch(loadComment(request));
+  };
+};
+
+export const { appendBlogs, setBlogs, updateLikes, removeBlog, loadComment } =
   blogSlice.actions;
 export default blogSlice.reducer;

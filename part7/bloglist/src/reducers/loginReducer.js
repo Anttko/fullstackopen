@@ -1,4 +1,3 @@
-import { showNotification } from "../reducers/notificationReducer";
 import loginService from "../services/login";
 import blogService from "../services/blogs";
 import { createSlice } from "@reduxjs/toolkit";
@@ -11,7 +10,7 @@ const loginSlice = createSlice({
       return (state = action.payload);
     },
     logoutUser(state, action) {
-      state = null;
+      return (state = action.payload);
     },
   },
 });
@@ -46,7 +45,7 @@ export const handleLogOut = () => {
   return async (dispatch) => {
     window.localStorage.clear();
     blogService.setToken(null);
-    dispatch(logoutUser);
+    dispatch(logoutUser(null));
   };
 };
 

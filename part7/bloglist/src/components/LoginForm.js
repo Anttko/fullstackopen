@@ -1,8 +1,8 @@
 import React from "react";
-
 import { useField } from "../hooks";
 import { handleLogin } from "../reducers/loginReducer";
 import { useDispatch } from "react-redux";
+import { Button, Input } from "../styles/common.styles";
 
 const LoginForm = (props) => {
   const dispatch = useDispatch();
@@ -13,6 +13,8 @@ const LoginForm = (props) => {
     event.preventDefault();
     const credentials = { username, password };
     dispatch(handleLogin(credentials));
+    username.reset()
+    password.reset()
   };
 
   return (
@@ -22,7 +24,7 @@ const LoginForm = (props) => {
       <form onSubmit={handleSubmit}>
         <div>
           username
-          <input
+          <Input
             id="username"
             type={username.type}
             value={username.value}
@@ -32,7 +34,7 @@ const LoginForm = (props) => {
         </div>
         <div>
           password
-          <input
+          <Input
             id="password"
             type={password.type}
             value={password.value}
@@ -40,9 +42,9 @@ const LoginForm = (props) => {
             placeholder="your password"
           />
         </div>
-        <button id="login-button" type="submit">
+        <Button id="login-button" type="submit">
           login
-        </button>
+        </Button>
       </form>
     </div>
   );

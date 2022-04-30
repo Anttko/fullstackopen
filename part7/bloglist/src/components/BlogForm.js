@@ -2,21 +2,24 @@ import React from "react";
 import { createBlog } from "../reducers/blogReducer";
 import { useField } from "../hooks";
 import { setNotification } from "../reducers/notificationReducer";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { Button, Input } from "../styles/common.styles";
 
 const BlogForm = (props) => {
   const title = useField("text");
   const author = useField("text");
   const url = useField("text");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const user = useSelector((state) => state.login);
 
   const addBlog = (event) => {
     event.preventDefault();
-
     if (title === "" || author === "") {
       dispatch(setNotification(`a log must have author and title`, 5));
     } else {
-      const text = `a blog ${title.value} added by ${author.value} `
+      const text = `a blog ${title.value} added by ${author.value} `;
       dispatch(
         createBlog({
           title: title.value,
@@ -25,14 +28,18 @@ const BlogForm = (props) => {
         })
       );
       dispatch(setNotification(text, 5));
+      navigate("/blogs");
     }
   };
+
+  if (user === null) {
+    return null;
+  }
 
   return (
     <form onSubmit={addBlog}>
       <div>
-        title:
-        <input
+        <Input
           type={title.type}
           value={title.value}
           id="title-input"
@@ -42,8 +49,7 @@ const BlogForm = (props) => {
         />
       </div>
       <div>
-        author:
-        <input
+        <Input
           type={author.type}
           id="author-input"
           value={author.value}
@@ -53,8 +59,7 @@ const BlogForm = (props) => {
         />
       </div>
       <div>
-        url:
-        <input
+        <Input
           type={url.type}
           id="url-input"
           value={url.value}
@@ -63,8 +68,8 @@ const BlogForm = (props) => {
           onChange={url.onChange}
         />
       </div>
-      <button type="submit">create</button>
-      <button
+      <Button type="submit">create</Button>
+      <Button
         type="button"
         onClick={() => {
           title.reset();
@@ -73,7 +78,7 @@ const BlogForm = (props) => {
         }}
       >
         reset
-      </button>
+      </Button>
     </form>
   );
 };

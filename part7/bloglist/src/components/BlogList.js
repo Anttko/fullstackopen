@@ -1,23 +1,31 @@
 import { useSelector } from "react-redux";
-import Blog from "./Blog";
+import {
+  StyledLink,
+  ListItem,
+  CenterUL,
+  Title,
+  BlogListing,
+} from "../styles/common.styles";
 
 const BlogList = (props) => {
   const blogs = useSelector((state) => state.blogs);
   console.log("blogs: ", blogs);
-  /*.sort(function (a, b) {
-    return b.likes - a.likes;
-  });*/
 
   console.log(blogs);
 
   return (
-    <div>
-      <ul>
+    <BlogListing>
+      <Title>Blogs</Title>
+      <CenterUL>
         {blogs.map((blog) => (
-          <Blog blog={blog} key={blog.id} />
+          <ListItem key={blog.id}>
+            <StyledLink to={`/blogs/${blog.id}`} key={blog.id}>
+              {blog.title}
+            </StyledLink>
+          </ListItem>
         ))}
-      </ul>
-    </div>
+      </CenterUL>
+    </BlogListing>
   );
 };
 
