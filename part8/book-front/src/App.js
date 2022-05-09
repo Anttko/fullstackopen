@@ -41,6 +41,7 @@ const App = () => {
       <Authors
         authors={queryAuthors.data.allAuthors}
         show={page === "authors"}
+        msg={notify}
       />
 
       <Books books={queryBooks.data.allBooks} show={page === "books"} />
