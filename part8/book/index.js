@@ -1,6 +1,8 @@
-import Book from "./models/Book";
-import Author from "./models/Author";
-import config from "./utils/config";
+
+const Book = require("./models/Book");
+const Author = require("./models/Author");
+const config = require("./utils/config");
+
 const mongoose = require("mongoose");
 const { ApolloServer, gql, UserInputError } = require("apollo-server");
 const { resolveGraphqlOptions } = require("apollo-server-core");
