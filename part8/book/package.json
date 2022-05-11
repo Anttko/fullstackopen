@@ -12,7 +12,9 @@
   "license": "MIT",
   "dependencies": {
     "apollo-server": "^3.6.7",
-    "graphql": "^16.4.0"
+    "dotenv": "^16.0.0",
+    "graphql": "^16.4.0",
+    "mongoose": "^6.3.3"
   },
   "devDependencies": {
     "nodemon": "^2.0.16"
