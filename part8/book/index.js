@@ -1,4 +1,3 @@
-
 const Book = require("./models/Book");
 const Author = require("./models/Author");
 const config = require("./utils/config");
@@ -98,33 +97,38 @@ const resolvers = {
     addBook: async (root, args) => {
       console.log(args);
       const checkAuthor = Author.findOne({ name: args.author });
-
+      const newBook = new Book({ ...args });
       console.log("search", checkAuthor);
-      const newBook = { ...args };
-      console.log(newBook);
-      if (checkAuthor) {
-        const newBook = new Book({ ...args });
-        return newBook.save();
-      } else {
+      if (!checkAuthor) {
         const newAuthor = new Author({ ...args.author });
-        newAuthor.save();
-        const newBook = new Book({ ...args });
-        console.log(newAuthor);
-        console.log(newBook);
-        return newBook.save();
+        try {
+          newAuthor.save();
+        } catch (error) {
+          throw new UserInputError(error.message, {
+            invalidArgs: args,
+          });
+        }
       }
+      try {
+        await newBook.save();
+      } catch (error) {
+        throw new UserInputError(error.message, {
+          invalidArgs: args,
+        });
+      }
+      return newBook;
     },
-    editAuthor: (root, args) => {
-      const author = authors.find((a) => a.name === args.name);
-      console.log(author);
-      if (!author) {
-        return null;
+    editAuthor: async (root, args) => {
+      const author = await Author.findOne({ name: args.name });
+      author.phone = args.phone;
+      try {
+        await author.save();
+      } catch (error) {
+        throw new UserInputError(error.message, {
+          invalidArgs: args,
+        });
       }
-      const updateAuthor = { ...author, born: args.setBornTo };
-      console.log(updateAuthor);
-      authors.map((a) => (a.name === args.name ? updateAuthor : a));
-      console.log("authors:", authors);
-      return updateAuthor;
+      return author;
     },
   },
 };
