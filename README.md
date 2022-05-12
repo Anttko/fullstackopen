@@ -14,7 +14,7 @@ Working on this course from the start of 2022. Interested in learning web-develo
 | part4 |  :white_check_mark: |  [src](./part4/)  |
 | part5 |  :white_check_mark: |  [src](./part5/)  |
 | part6 |  :white_check_mark: |  [src](./part6/)  |
-| part7 |  |  [src](./part7/)  |
+| part7 | :white_check_mark: |  [src](./part7/)  |
 | part8 |   |  [src](./part8/)  |
 | part9 |   |  [src](./part9/)  |
 | part10 |   |  [src](./part10/)  |
