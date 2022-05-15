@@ -1,0 +1,6 @@
+const calculateExercises = (exercise: number[]) => {
+
+
+    
+
+};
