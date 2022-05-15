@@ -4,8 +4,6 @@ const config = require("./utils/config");
 const User = require("./models/User");
 const mongoose = require("mongoose");
 const { ApolloServer, gql, UserInputError } = require("apollo-server");
-const { resolveGraphqlOptions } = require("apollo-server-core");
-const { find } = require("./models/Book");
 const jwt = require("jsonwebtoken");
 
 const JWT_SECRET = "NEED_HERE_A_SECRET_KEY";
@@ -44,6 +42,7 @@ const typeDefs = gql`
     allAuthors: [Author!]!
     findAuthor(name: String!): Author
     me: User
+    meFavoriteBooks: [Book!]!
     allGenres: [String!]!
   }
   type Mutation {
@@ -65,6 +64,7 @@ const typeDefs = gql`
   type Token {
     value: String!
   }
+  
 `;
 
 const resolvers = {
@@ -102,6 +102,14 @@ const resolvers = {
     me: (root, args, context) => {
       return context.currentUser;
     },
+    meFavoriteBooks : async (root, args, context) => {
+      const genre = context.currentUser.favoriteGenre
+      const findByGenre = await Book.find({ genres: genre }).populate(
+        "author"
+      );
+      return findByGenre;
+
+    },
     allGenres: async () => {
       const books = await Book.find({});
       console.log("finder", books);
@@ -137,7 +145,7 @@ const resolvers = {
     addBook: async (root, args, context) => {
       console.log(args);
       const currentUser = context.currentUser;
-
+      console.log('currentUSer', currentUser)
       if (!currentUser) {
         throw new AuthenticationError("not authenticated");
       }
