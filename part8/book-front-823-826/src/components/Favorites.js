@@ -31,7 +31,7 @@ const Favorites = (props) => {
   if (favorite.loading || favGenre.loading) {
     return <div>loading</div>;
   }
-  console.log(favGenre);
+
 
   if (!props.show) {
     return null;
