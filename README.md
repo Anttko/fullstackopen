@@ -1,6 +1,6 @@
 # Fullstackopen.com course
 
-Working on this course from the start of 2022. Interested in learning web-development.  
+Working on this course from the end of 2021. Interested in learning web-development.  
 
 
 ## Progress :soon:
@@ -16,7 +16,7 @@ Working on this course from the start of 2022. Interested in learning web-develo
 | part6 |  :white_check_mark: |  [src](./part6/)  |
 | part7 | :white_check_mark: |  [src](./part7/)  |
 | part8 | :white_check_mark:  |  [src](./part8/)  |
-| part9 |   |  [src](./part9/)  |
+| part9 |  :white_check_mark: |  [src](./part9/)  |
 | part10 |   |  [src](./part10/)  |
 | part11 |   |  [src](./part11/)  |
 | part12 |   |  [src](./part12/)  |
