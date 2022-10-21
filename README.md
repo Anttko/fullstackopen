@@ -17,10 +17,10 @@ Working on this course from the end of 2021. Interested in learning web-developm
 | part7 | :white_check_mark: |  [src](./part7/)  |
 | part8 | :white_check_mark:  |  [src](./part8/)  |
 | part9 |  :white_check_mark: |  [src](./part9/)  |
-| part10 | :white_check_mark:  |  [src](./part10/)  |
-| part11 | :white_check_mark:  |  [src](./part11/)  |
-| part12 | :white_check_mark:  |  [src](./part12/)  |
-| part13 |  |  [src](./part13/)  |
+| part10 | :white_check_mark:  | [repository](https://github.com/Anttko/full-stack-open-pokedex) & [repository](https://github.com/Anttko/rate-repository-app)   |
+| part11 | :white_check_mark:  |  [repositry](https://github.com/Anttko/fuzzy-pancake)  |
+| part12 | :white_check_mark:  |  [repository](https://github.com/Anttko/fso-containers-applications-part12-anttko)  |
+| part13 |:white_check_mark:  |  [repository](https://github.com/Anttko/incredible_databases)  |
 
 
 
